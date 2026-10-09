@@ -14,8 +14,8 @@ def bytes_to_mb(value):
     return value / (1024 ** 2)
 
 def main():
-    while True:
-        os.system("cls" if os.name == "nt" else "clear")
+    #while True:
+        #os.system("cls" if os.name == "nt" else "clear")
 
         print("=" * 40)
         print("           PC MONITOR")
@@ -73,7 +73,7 @@ def main():
         
         print("\n" + "=" * 40)
 
-        time.sleep(1.5)
+        #time.sleep(1.5)
 
 if __name__ == "__main__":
     main()
