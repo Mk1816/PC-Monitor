@@ -59,8 +59,18 @@ def main():
         print(f"Percent: {battery['percent']:.1f}%")
     print(f"Plugged: {battery['plugged']}")
 
-    
+    print("\n" + "Want to refresh? \n(y/n)")
+        
     print("\n" + "=" * 40)
+
+    while True:
+        choice = input().lower()
+        if choice == "y" or choice == "yes":
+            main()
+        elif choice == "n" or choice == "no":
+            continue
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
 
 if __name__ == "__main__":
     main()
