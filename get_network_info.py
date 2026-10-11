@@ -1,5 +1,4 @@
 import psutil
-import time
 
 def get_network_info():
     network = psutil.net_io_counters()
@@ -9,15 +8,11 @@ def get_network_info():
         "received": network.bytes_recv,
     }
 
-def get_network_speed(interval=1):
-    before = psutil.net_io_counters()
-    time.sleep(interval)
-    after = psutil.net_io_counters()
-
-    download_speed = (after.bytes_sent - before.bytes_sent) / interval
-    upload_speed = (after.bytes_recv - before.bytes_recv) / interval
+def get_network_speed(before, after, interval):
+    if interval <= 0:
+        raise ValueError("interval must be greater than zero")
 
     return {
-        "download_speed": download_speed,
-        "upload_speed": upload_speed,
+        "download_speed": max(0, after["received"] - before["received"]) / interval,
+        "upload_speed": max(0, after["sent"] - before["sent"]) / interval,
     }
