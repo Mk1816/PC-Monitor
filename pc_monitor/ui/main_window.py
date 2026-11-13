@@ -67,6 +67,7 @@ class MainWindow(QMainWindow):
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.Shape.NoFrame)
         content = QWidget()
+        content.setObjectName("scrollContent")
         grid = QGridLayout(content)
         grid.setContentsMargins(0, 0, 0, 0)
         grid.setHorizontalSpacing(16)

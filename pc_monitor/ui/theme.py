@@ -1,7 +1,7 @@
 APP_STYLESHEET = """
 QMainWindow, QWidget#central {
-    background: #0c111b;
-    color: #e8edf6;
+    background: #111b2a;
+    color: #111b2a;
     font-family: "Inter", "Segoe UI", sans-serif;
 }
 QLabel#title { color: #f3f6fc; font-size: 25px; font-weight: 700; }
@@ -11,7 +11,7 @@ QLabel#subtitle, QLabel#updated, QLabel#detail {
 }
 QLabel#status { color: #5cdda5; font-size: 12px; padding-left: 18px; }
 QFrame#card {
-    background: #151d2b;
+    background: #111b2a;
     border: 1px solid #253148;
     border-radius: 14px;
 }
@@ -26,5 +26,20 @@ QProgressBar {
     text-align: center;
 }
 QProgressBar::chunk { background: #63a7ff; border-radius: 5px; }
-QScrollArea { background: transparent; }
+QScrollArea, QAbstractScrollArea::viewport, QWidget#scrollContent {
+    background: #0e1725;
+}
+QScrollBar:vertical {
+    background: #0e1725;
+    width: 12px;
+    margin: 0;
+}
+QScrollBar::handle:vertical {
+    background: #253148;
+    border-radius: 5px;
+    min-height: 24px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
 """

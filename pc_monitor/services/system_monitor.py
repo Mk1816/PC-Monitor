@@ -1,10 +1,10 @@
+import sys
 import time
+from pathlib import Path
 
-from get_battery_info import get_battery_info
-from get_cpu_info import get_cpu_info
-from get_disk_info import get_disk_info
-from get_network_info import get_network_info, get_network_speed
-from get_ram_info import get_ram_info
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from pc_monitor.models import (
     BatteryMetrics,
     CpuMetrics,
@@ -13,6 +13,11 @@ from pc_monitor.models import (
     NetworkMetrics,
     SystemSnapshot,
 )
+from pc_monitor.services.get_battery_info import get_battery_info
+from pc_monitor.services.get_cpu_info import get_cpu_info
+from pc_monitor.services.get_disk_info import get_disk_info
+from pc_monitor.services.get_network_info import get_network_info, get_network_speed
+from pc_monitor.services.get_ram_info import get_ram_info
 
 
 class SystemMonitor:
