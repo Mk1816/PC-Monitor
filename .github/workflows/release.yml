@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-latest
+          - os: windows-11-x64
             arch: x64
             ext: .exe
 
@@ -22,13 +22,13 @@ jobs:
             arch: arm64
             ext: .exe
 
-          - os: ubuntu-22.04
+          - os: GNU/Linux-x64
             arch: x64
             ext: ''
 
-          - os: ubuntu-22.04-arm
-            arch: arm64
-            ext: ''
+  #        - os: GNU-Linux-arm
+ #           arch: arm64
+#            ext: ''
 
     runs-on: ${{ matrix.os }}
 
