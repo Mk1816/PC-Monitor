@@ -14,30 +14,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-11-x64
-            arch: x64
+          - os: windows-latest
+            name: Windows-x64
             ext: .exe
 
-          - os: windows-11-arm
-            arch: arm64
-            ext: .exe
-
-          - os: GNU/Linux-x64
-            arch: x64
+          - os: ubuntu-22.04
+            name: GNU-Linux-x64
             ext: ''
-
-  #        - os: GNU-Linux-arm
- #           arch: arm64
-#            ext: ''
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -47,21 +39,21 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      - name: Build
+      - name: Build executable
         run: |
           pyinstaller --clean --onefile main.py
 
       - name: Prepare artifact
         shell: bash
         run: |
-          mkdir release
+          mkdir -p release
           cp dist/main${{ matrix.ext }} \
-            release/MyProject-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}
+            release/MyProject-${{ matrix.name }}${{ matrix.ext }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: MyProject-${{ matrix.os }}-${{ matrix.arch }}
+          name: ${{ matrix.name }}
           path: release/*
 
   release:
@@ -70,13 +62,13 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: release
           merge-multiple: true
 
-      - name: Publish Release
-        uses: softprops/action-gh-release@v2
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
         with:
           files: release/*
           generate_release_notes: true
